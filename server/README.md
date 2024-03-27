@@ -6,7 +6,7 @@ LANGKAH LANGKAH PEMBUATAN API
 
 2. npm install <package_name>
 - untuk menginstall modul dari npm
-- npm install express pg sequelize dotenv cors bcrypt
+- npm install express pg sequelize dotenv cors bcrypt 
 - npm install nodemon sequelize-cli --save-dev
 
 3. Membuat file app.js dan .gitignore, .env
@@ -29,7 +29,7 @@ KONFIGURASI POSTGRES MENGGUNAKAN SEQUELIZE
 3. npx sequelize-cli db:create
 - untuk membuat database lewat sequelize tanpa query manual
 
-4. npx sequelize-cli model:generate --name User --attributes username:string,password:string,userId:integer
+4. npx sequelize-cli model:generate --name User --attributes email:string,password:string
 
 - untuk membuat class dan juga migrations
 

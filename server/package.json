@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dep": "pnpm install express pg sequelize dotenv cors bcrypt jsonwebtoken",
     "depSaveDev": "pnpm install nodemon sequelize-cli --save-dev",
+    "db-create": "pnpx sequelize-cli db:create",
+    "db-migrate": "pnpx sequelize-cli db:migrate",
     "start": "nodemon app.js"
   },
   "keywords": [],
