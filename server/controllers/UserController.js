@@ -32,14 +32,16 @@ class UserController {
             // check email
             const emailFound = await User.findOne({ where: { email } })
 
+            const access_token = tokenGenerator({ id: emailFound.id, email: emailFound.email })
+
+
             // emailFound=true,check password
             if (emailFound) {
                 const hashedPassword = emailFound.password
                 const decryptpassword = await decrypt(password, hashedPassword)
 
-                // check password = true, generate token
+                // password = true, generate token
                 if (decryptpassword) {
-                    const access_token = tokenGenerator({ id: emailFound.id, email: emailFound.email })
                     res.status(200).json(access_token)
                 } else {
                     res.status(404).json({ message: 'Wrong Password' })
@@ -54,7 +56,7 @@ class UserController {
         }
     }
 
-    
+
 
 
 }
