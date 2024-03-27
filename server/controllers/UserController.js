@@ -39,8 +39,8 @@ class UserController {
 
                 // check password = true, generate token
                 if (decryptpassword) {
-                    const acess_token = tokenGenerator({ id: emailFound.id, email: emailFound.email })
-                    res.status(200).json(acess_token)
+                    const access_token = tokenGenerator({ id: emailFound.id, email: emailFound.email })
+                    res.status(200).json(access_token)
                 } else {
                     res.status(404).json({ message: 'Wrong Password' })
                     console.log(decryptpassword)
@@ -53,6 +53,8 @@ class UserController {
             res.status(500).json(error.message)
         }
     }
+
+    
 
 
 }
