@@ -9,6 +9,7 @@
     "depSaveDev": "pnpm install nodemon sequelize-cli --save-dev",
     "db-create": "pnpx sequelize-cli db:create",
     "db-migrate": "pnpx sequelize-cli db:migrate",
+    "db-migrate-undo-all": "pnpx sequelize-cli db:migrate:undo:all",
     "start": "nodemon app.js"
   },
   "keywords": [],

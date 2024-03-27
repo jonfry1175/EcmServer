@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true,
         notEmpty: true,
-        notNull: true,    
+        notNull: true,
       }
     },
     password: {
@@ -29,13 +29,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true,   
-        len: [8, 100] 
+        notNull: true,
+        len: [8, 100]
       }
     }
   }, {
     sequelize,
     modelName: 'User',
   });
+
+
+  //validate unique email
+  User.beforeCreate(async (user, options) => {
+    const emailFound = await User.findOne({ where: { email: user.email } })
+    if (emailFound) {
+      throw new Error('Email already exists')
+    }
+  })
+
   return User;
 };
