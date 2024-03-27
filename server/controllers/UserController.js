@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const {encrypt} = require('../helpers/bcrypt')
+const { encrypt, decrypt } = require('../helpers/bcrypt')
 
 
 class UserController {
@@ -17,7 +17,7 @@ class UserController {
             const { email, password } = req.body
             const hashedPassword = await encrypt(password)
             const result = await User.create({ email, password: hashedPassword })
-            
+
             res.status(201).json(result)
         } catch (error) {
             res.status(500).json(error.message)
@@ -26,6 +26,25 @@ class UserController {
 
     static async login(req, res) {
         try {
+            const { email, password } = req.body
+
+            // check email
+            const emailFound = await User.findOne({ where: { email } })
+
+            // emailFound=true,check password
+            if(emailFound) {
+                const hashedPassword = emailFound.password
+                const decryptpassword = await decrypt(password, hashedPassword)
+                if(decryptpassword) {
+                    res.status(200).json({message: 'Success Login'})
+                } else {
+                    res.status(404).json({message: 'Wrong Password'})
+                    console.log(decryptpassword)
+                }
+            } else {
+                res.status(404).json({message: 'Email not found'})
+            }
+            
 
         } catch (error) {
             res.status(500).json(error.message)
